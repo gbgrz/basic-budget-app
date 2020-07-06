@@ -1,6 +1,8 @@
-import React from 'react'
+import React, { useState } from 'react'
 
 const Add = (props) => {
+
+    const [redFocus, setRedFocus] = useState(false);
 
     const { addTransaction } = props;
 
@@ -9,7 +11,6 @@ const Add = (props) => {
         inputDescription: '.add__description',
         inputValue: '.add__value'
     };
-
 
     const addNew = () => {
         const input = getInput();
@@ -42,13 +43,13 @@ const Add = (props) => {
     return (
         <div className="add">
             <div className="add__container" onKeyPress={enterPressed}>
-                <select className="add__type" defaultValue="inc" >
+                <select className={`add__type ${redFocus && "red-focus"}`} defaultValue="inc" onChange={() => setRedFocus(!redFocus) }>
                     <option value="inc">+</option>
                     <option value="exp">-</option>
                 </select>
-                <input type="text" className="add__description" placeholder="Add description" />
-                <input type="number" className="add__value" placeholder="Value" />
-                <button className="add__btn" onClick={addNew}><i className="ion-ios-checkmark-outline"></i></button>
+                <input type="text" className={`add__description ${redFocus && "red-focus"}`} placeholder="Add description" />
+                <input type="number" className={`add__value ${redFocus && "red-focus"}`} placeholder="Value" />
+                <button className={`add__btn ${redFocus && "red"}`} onClick={addNew}><i className="ion-ios-checkmark-outline"></i></button>
             </div>
         </div>
     )
