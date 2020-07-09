@@ -11,7 +11,7 @@ namespace Domain
         public Guid Id { get; set; }
         [Column("date")]
         [Required]
-        public DateTime Date { get; set; }
+        public DateTime? Date { get; set; }
         [Column("type")]
         [Required]
         public string Type { get; set; }

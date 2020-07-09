@@ -1,7 +1,7 @@
 
 import React from 'react';
 import './App.css';
-import BudgetApp from './Component/BudgetApp';
+import BudgetApp from './component/BudgetApp';
 
 function App() {
 
