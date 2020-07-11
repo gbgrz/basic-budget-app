@@ -148,6 +148,25 @@ body {
   border-radius: 3px;
 }
 
+.budget__prev__btn,
+.budget__next__btn {
+  position: absolute;
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.budget__prev__btn:focus, 
+.budget__next__btn:focus {
+  outline: none;
+}
+
+.budget__next__btn {
+  right: 0%;
+}
+
 
 /**********************************************
 *** BOTTOM PART

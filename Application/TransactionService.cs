@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Persistence;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
@@ -61,9 +62,11 @@ namespace Application
             }
         }
 
-        public async Task<List<Transaction>> GetAll()
+        public async Task<List<Transaction>> Get(DateTime budgetMonth)
         {
-            return await this._context.Transactions.ToListAsync();
+            DateTime budgetMonthStart = new DateTime(budgetMonth.Year, budgetMonth.Month, 1);
+            DateTime budgetMonthEnd = budgetMonthStart.AddMonths(1);
+            return await this._context.Transactions.Where(t => t.Date >= budgetMonthStart && t.Date < budgetMonthEnd).ToListAsync();
         }
     }
 }

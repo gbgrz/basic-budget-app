@@ -1,21 +1,16 @@
 import React from 'react'
 import ExpenseTransaction from './ExpenseTransaction';
+import util from '../common/util';
 
 const Expenses = (props) => {
 
-    const { transactions, budget, deleteTransaction } = props;
+    const { transactions, totalIncome, deleteTransaction } = props;
 
-    const displayPercentage = (value, totalBudget) => {
-        if (totalBudget <= 0) {
-            return '---';
-        } else {
-            return `${Math.round((value / totalBudget) * 100)}%`;
-        }
-    }
+    const { displayPercentage } = util;
 
     const renderExpenses = (expenses, totalBudget) => {
         return expenses.map((t, i) => {
-            return (<ExpenseTransaction key={t.id} id={t.id} description={t.description} value={t.value} percentage={displayPercentage(t.value, totalBudget)} deleteTransaction={deleteTransaction} />);
+            return (<ExpenseTransaction key={t.id} id={t.id} description={t.description} value={t.value} percentage={displayPercentage(totalBudget, t.value)} deleteTransaction={deleteTransaction} />);
         });
     }
 
@@ -25,7 +20,7 @@ const Expenses = (props) => {
             
             <div className="expenses__list">
                 
-                {renderExpenses(transactions, budget.totals.income)}
+                {renderExpenses(transactions, totalIncome)}
 
             </div>
         </div>

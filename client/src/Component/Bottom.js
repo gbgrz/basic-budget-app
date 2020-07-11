@@ -6,21 +6,22 @@ import api from '../api/api';
 
 const Bottom = (props) => {
 
-    const { transactions, setTransactions, budget } = props;
+    const { transactions, setTransactions, totalIncome, budgetDate } = props;
 
     useEffect(() => {
+        
         async function fetch() {
-            const data = await api.transactions.get();
+            const data = await api.transactions.get(budgetDate);
             setTransactions(data);
           }
       
         fetch()
 
-    }, [setTransactions])
+    }, [setTransactions, budgetDate])
 
     const addTransaction = async (transaction) => {
-        const newTransaction = await api.transactions.create({ ...transaction, date: '2020-07-01' });
-
+        const newTransaction = await api.transactions.create({ ...transaction, date: budgetDate });
+        
         if (transaction.type === 'inc') {
             setTransactions({
                 income: [...transactions.income, { id: newTransaction.id, description: transaction.description, value: transaction.value }],
@@ -53,7 +54,7 @@ const Bottom = (props) => {
                 
                 <Income transactions={transactions.income} deleteTransaction={deleteTransaction}/>
                 
-                <Expenses transactions={transactions.expense} budget={budget} deleteTransaction={deleteTransaction}/>
+                <Expenses transactions={transactions.expense} totalIncome={totalIncome} deleteTransaction={deleteTransaction}/>
                 
             </div>
         </div>

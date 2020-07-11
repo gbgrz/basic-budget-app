@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Application;
@@ -16,10 +17,10 @@ namespace API.Controllers
             this._transactionService = transactionService;
         }
 
-        [HttpGet]
-        public async Task<ActionResult<List<Transaction>>> GetAll()
+        [HttpGet("{budgetMonth}")]
+        public async Task<ActionResult<List<Transaction>>> Get(DateTime budgetMonth)
         {
-            return await this._transactionService.GetAll();
+            return await this._transactionService.Get(budgetMonth);
         }
         [HttpPost]
         public async Task<ActionResult<Transaction>> Create(Transaction transaction)
